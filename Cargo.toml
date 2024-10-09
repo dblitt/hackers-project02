@@ -1,0 +1,9 @@
+[package]
+name = "http-basic-lambda"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lambda_http = "0.13.0"
+lambda_runtime = "0.13.0"
+tokio = { version = "1", features = ["macros"] }
