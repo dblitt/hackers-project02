@@ -1,0 +1,115 @@
+/* General styling for the app */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.container {
+    width: 360px;  /* Typical phone width */
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.section {
+    margin-bottom: 30px;
+    padding: 15px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+}
+
+.section h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+/* Message board styling */
+.message-board {
+    background-color: #f9fafb;
+}
+
+.message-board ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.message-board li {
+    background-color: #e3f2fd;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 10px;
+    color: #333;
+}
+
+input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Location check-in styling */
+.location-checkin {
+    background-color: #f1f8e9;
+}
+
+.location-checkin li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #e8f5e9;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.location-checkin span {
+    font-weight: bold;
+    color: #4caf50;
+}
+
+.location-checkin button {
+    background-color: #4caf50;
+}
+
+.location-checkin button:hover {
+    background-color: #388e3c;
+}
+
+/* Make the layout responsive for smaller screens */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;  /* Fill the screen width on smaller devices */
+    }
+}
+

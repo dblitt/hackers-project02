@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barbuddy</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Main container for a phone app-like view -->
+    <div class="container">
+        <h1> - - - BARBUDDY - - - </h1>
+
+        <!-- Message Board Section -->
+        <div class="message-board">
+            <h2>LOCATIONS LIST</h2>
+            <ul id="message-list"></ul>
+            <input type="text" id="message-input" placeholder="Enter your name & location">
+            <button onclick="postMessage()">Post</button>
+        </div>
+
+        <!-- Location Check-in Section -->
+        <div class="location-checkin">
+            <h2>LOCATION CHECK-IN</h2>
+            <ul id="location-list">
+                <!-- Locations will be added dynamically -->
+            </ul>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
