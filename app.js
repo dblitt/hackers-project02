@@ -44,7 +44,7 @@ function fake_check_in(location) {
         if (!peopleAtLocations[location].some(person => person.name === inputValue)) {
             peopleAtLocations[location].push({ name: inputValue, time: timestamp });
             updatePeopleAtLocation(); // Update the displayed people list
-            alert(`${inputValue} checked in at ${location} at ${timestamp}`);
+            //alert(`${inputValue} checked in at ${location} at ${timestamp}`);
         } else {
             alert(`${inputValue} is already checked in at ${location}`);
         }
@@ -95,7 +95,7 @@ function updatePeopleAtLocation() {
         // Populate the list with names and timestamps of people at the current location
         peopleAtLocations[location].forEach(person => {
             const personLi = document.createElement("li");
-            personLi.textContent = `${person.name} (Checked in at: ${person.time})`;
+            personLi.textContent = `${person.name} (at ${person.time})`;
             peopleList.appendChild(personLi);
         });
 

@@ -3,7 +3,7 @@ body {
     font-family: 'Monaco', monospace;
     background-color: #f0f0f0;
     margin: 0;
-    padding: 175px 0 0;
+    padding: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -69,8 +69,7 @@ h6 {
     color: #555;
 }
 
-/* Message board styling */
-.message-board {
+.people-list {
     background-color: #f9fafb;
     border: 2px solid #999;
     border-radius: 15px;
@@ -78,12 +77,12 @@ h6 {
     margin-bottom: 17px;
 }
 
-.message-board ul {
+.people-list ul {
     list-style-type: none;
     padding: 0;
 }
 
-.message-board li {
+.people-list li {
     background-color: #e3f2fd;
     margin: 10px 0;
     padding: 10px;
@@ -118,6 +117,7 @@ button:hover {
     border: 2px solid #999;
     border-radius: 15px;
     padding: 15px;
+    margin-bottom: 17px;
 }
 
 .location-checkin li {
