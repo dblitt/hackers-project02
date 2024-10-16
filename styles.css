@@ -35,6 +35,13 @@ h6 {
     font-size: 0.7rem;  /* Optional: Reduce font size for <h6> */
 }
 
+.icon {
+    width: 40px;  /* Adjust size to fit well next to the text */
+    height: auto; /* Maintain aspect ratio */
+    vertical-align: middle; /* Align vertically with the text */
+    margin-right: 8px; /* Space between the icon and text */
+}
+
 .container {
     width: 360px;  /* Typical phone width */
     background-color: white;
