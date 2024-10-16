@@ -19,26 +19,29 @@
         <h1> - - BARBUDDY - - </h1>
 
         <h4>Where is everyone? </h4>
-        <h4>Where's my next beer?</h4> 
+        <h4>Where's the next beer?</h4> 
         <h6>An app to get these questions answered.</h6>
 
         <h1> - - - - - - - - -</h1>
 
-        <!-- Message Board Section -->
-        <div class="message-board">
-            <h2>LOCATIONS LIST</h2>
-            <ul id="message-list"></ul>
-            <input type="text" id="message-input" placeholder="Enter your name & location">
-            <button onclick="postMessage()">Post</button>
-        </div>
-
         <!-- Location Check-in Section -->
         <div class="location-checkin">
             <h2>LOCATION CHECK-IN</h2>
+            <input type="text" id="name-input" placeholder="name">
             <ul id="location-list">
                 <!-- Locations will be added dynamically -->
             </ul>
         </div>
+
+        <!-- People Location List -->
+        <div class="people-list"> 
+            <h2>People at Locations</h2>
+            <ul id="location-people-list">
+                <!-- Dynamic people lists will be generated here-->
+            </ul>
+        </div>
+
+
     </div>
 
     <script src="app.js"></script>
