@@ -75,16 +75,22 @@ function updatePeopleAtLocation() {
         result.data.checkins.forEach(checkin => {
             if (checkin.location in peopleAtLocations) {
                 let timestamp = new Date(checkin.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', hour12: true }); // Format as 4:20 PM
-                peopleAtLocations[checkin.location].push({name: checkin.user_id, time: timestamp})
+                peopleAtLocations[checkin.location].push({name: checkin.user_id, time: timestamp, real_time: new Date(checkin.time)})
             }
         })
+
+        for (const key in peopleAtLocations) {
+            if (Array.isArray(peopleAtLocations[key])) {
+                peopleAtLocations[key].sort((b, a) => a.real_time - b.real_time);
+            }
+          }
     
 
         // Create an array of locations with their people counts
         const locationCounts = locations.map(loc => ({
             location: loc,
             count: peopleAtLocations[loc].length,
-            recentTime: peopleAtLocations[loc].length > 0 ? peopleAtLocations[loc][peopleAtLocations[loc].length - 1].time : null
+            recentTime: peopleAtLocations[loc].length > 0 ? peopleAtLocations[loc][0].real_time : null
         }));
 
         console.log(locationCounts);
@@ -92,7 +98,8 @@ function updatePeopleAtLocation() {
         // Sort locations by count of people, then by recent check-in time
         locationCounts.sort((a, b) => {
             if (b.count === a.count) {
-                return b.recentTime ? b.recentTime.localeCompare(a.recentTime) : -1; // Sort by most recent time
+                // return b.recentTime ? b.recentTime.localeCompare(a.recentTime) : -1; // Sort by most recent time
+                return b.recentTime - a.recentTime
             }
             return b.count - a.count; // Sort by count of people
         });
@@ -110,9 +117,14 @@ function updatePeopleAtLocation() {
 
             // Create a nested list for people at this location
             const peopleList = document.createElement("ul");
-            peopleList.style.display = "none"; // Initially hidden
+            if (location === toggled_list) {
+                peopleList.style.display = 'block'
+            } else {    
+                peopleList.style.display = "none"; // Initially hidden
+            }
 
             // Populate the list with names, timestamps, and a "Check Out" button
+            const realname = document.getElementById("name-input").value.trim();
             peopleAtLocations[location].forEach((person, index) => {
                 const personLi = document.createElement("li");
                 personLi.textContent = `${person.name} (at ${person.time})`;
@@ -123,6 +135,10 @@ function updatePeopleAtLocation() {
                 checkOutButton.onclick = function() {
                     checkOut(location, index); // Pass location and the index of the person to be checked out
                 };
+                
+                if (realname !== person.name && realname !== "hunter2admin") {
+                    checkOutButton.style.display='none' ;
+                }
 
                 personLi.appendChild(checkOutButton);
                 peopleList.appendChild(personLi);
@@ -141,6 +157,7 @@ function checkOut(location, personIndex) {
     // updatePeopleAtLocation(); // Update the displayed people list
 }
 
+toggled_list = ''
 
 // Function to toggle the display of the people list for a location
 function togglePeopleList(location) {
@@ -149,6 +166,11 @@ function togglePeopleList(location) {
         const subList = item.querySelector("ul");
         if (subList && item.firstChild.textContent.startsWith(location)) {
             subList.style.display = subList.style.display === "none" ? "block" : "none";
+            if (subList.style.display === "block") {
+                toggled_list = location
+            } else {
+                toggled_list = ''
+            }
         } else if (subList) {
             subList.style.display = "none"; // Hide other lists
         }
@@ -156,18 +178,18 @@ function togglePeopleList(location) {
 }
 
 
-// Function to toggle the display of the people list for a location
-function togglePeopleList(location) {
-    const locationPeopleListItems = document.querySelectorAll("#location-people-list li");
-    locationPeopleListItems.forEach(item => {
-        const subList = item.querySelector("ul");
-        if (subList && item.firstChild.textContent.startsWith(location)) {
-            subList.style.display = subList.style.display === "none" ? "block" : "none";
-        } else if (subList) {
-            subList.style.display = "none"; // Hide other lists
-        }
-    });
-}
+// // Function to toggle the display of the people list for a location
+// function togglePeopleList(location) {
+//     const locationPeopleListItems = document.querySelectorAll("#location-people-list li");
+//     locationPeopleListItems.forEach(item => {
+//         const subList = item.querySelector("ul");
+//         if (subList && item.firstChild.textContent.startsWith(location)) {
+//             subList.style.display = subList.style.display === "none" ? "block" : "none";
+//         } else if (subList) {
+//             subList.style.display = "none"; // Hide other lists
+//         }
+//     });
+// }
 
 
 // Load locations on page load
@@ -183,4 +205,13 @@ function docReady(fn) {
     }
 }    
 
-docReady(updatePeopleAtLocation)
+docReady(() => {
+    updatePeopleAtLocation()
+
+    setInterval(onInterval, 5000)
+})
+
+
+function onInterval() {
+    updatePeopleAtLocation()
+}
