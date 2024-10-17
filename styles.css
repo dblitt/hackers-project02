@@ -3,7 +3,7 @@ body {
     font-family: 'Monaco', monospace;
     background-color: #f0f0f0;
     margin: 0;
-    padding: 400px;
+    padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -43,7 +43,8 @@ h6 {
 }
 
 .container {
-    width: 360px;  /* Typical phone width */
+    width: 100%;  /* Typical phone width */
+    max-width: 400px;
     background-color: white;
     border-radius: 20px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -51,19 +52,15 @@ h6 {
     text-align: center; /* center all content inside the container */
 }
 
-.logo {
-    margin-bottom: 20px;
-}
-
 .logo img {
     max-width: 100%;
     height: auto;
-    display: block;
+    vertical-align: middle;
     margin: 0 auto;
 }
 
 .section {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     padding: 15px;
     border-radius: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -98,7 +95,7 @@ h6 {
 }
 
 input[type="text"] {
-    width: 80%;
+    width: 100%;
     padding: 10px;
     border: 2px solid #ddd;
     border-radius: 10px;
@@ -106,12 +103,14 @@ input[type="text"] {
 }
 
 button {
+    width: 100%;
     padding: 10px;
     border: none;
     border-radius: 10px;
     background-color: #007bff;
     color: white;
     cursor: pointer;
+    margin-bottom: 10px;
 }
 
 button:hover {
@@ -151,10 +150,26 @@ button:hover {
     background-color: #388e3c;
 }
 
-/* Make the layout responsive for smaller screens */
+/* Media Query for Smaller Screens */
 @media (max-width: 768px) {
     .container {
-        width: 95%;  /* Fill the screen width on smaller devices */
+        width: 95%; /* Fill the screen width on smaller devices */
+    }
+
+    .logo img {
+        max-width: 80px; /* Make logo smaller on mobile */
+    }
+
+    h1 {
+        font-size: 1.2rem;
+    }
+
+    h2 {
+        font-size: 1.1rem;
+    }
+
+    button {
+        padding: 8px; /* Adjust button padding on mobile */
     }
 }
 
