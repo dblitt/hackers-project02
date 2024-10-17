@@ -132,7 +132,8 @@ function updatePeopleAtLocation() {
                 // Create a Check Out button for each person
                 const checkOutButton = document.createElement("button");
                 checkOutButton.textContent = "Check Out";
-                checkOutButton.onclick = function() {
+                checkOutButton.onclick = function(event) {
+                    event.stopPropagation()
                     checkOut(location, index); // Pass location and the index of the person to be checked out
                 };
                 
@@ -176,21 +177,6 @@ function togglePeopleList(location) {
         }
     });
 }
-
-
-// // Function to toggle the display of the people list for a location
-// function togglePeopleList(location) {
-//     const locationPeopleListItems = document.querySelectorAll("#location-people-list li");
-//     locationPeopleListItems.forEach(item => {
-//         const subList = item.querySelector("ul");
-//         if (subList && item.firstChild.textContent.startsWith(location)) {
-//             subList.style.display = subList.style.display === "none" ? "block" : "none";
-//         } else if (subList) {
-//             subList.style.display = "none"; // Hide other lists
-//         }
-//     });
-// }
-
 
 // Load locations on page load
 window.onload = loadLocations;
