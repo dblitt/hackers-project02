@@ -71,8 +71,7 @@ function updatePeopleAtLocation() {
     // Sort locations by count of people, then by recent check-in time
     locationCounts.sort((a, b) => {
         if (b.count === a.count) {
-            // If counts are equal, check the most recent timestamp
-            return b.recentTime ? (b.recentTime.localeCompare(a.recentTime)) : -1; // Sort by most recent time
+            return b.recentTime ? b.recentTime.localeCompare(a.recentTime) : -1; // Sort by most recent time
         }
         return b.count - a.count; // Sort by count of people
     });
@@ -92,10 +91,19 @@ function updatePeopleAtLocation() {
         const peopleList = document.createElement("ul");
         peopleList.style.display = "none"; // Initially hidden
 
-        // Populate the list with names and timestamps of people at the current location
-        peopleAtLocations[location].forEach(person => {
+        // Populate the list with names, timestamps, and a "Check Out" button
+        peopleAtLocations[location].forEach((person, index) => {
             const personLi = document.createElement("li");
             personLi.textContent = `${person.name} (at ${person.time})`;
+
+            // Create a Check Out button for each person
+            const checkOutButton = document.createElement("button");
+            checkOutButton.textContent = "Check Out";
+            checkOutButton.onclick = function() {
+                checkOut(location, index); // Pass location and the index of the person to be checked out
+            };
+
+            personLi.appendChild(checkOutButton);
             peopleList.appendChild(personLi);
         });
 
@@ -103,6 +111,13 @@ function updatePeopleAtLocation() {
         locationPeopleList.appendChild(li);
     });
 }
+
+// Function to check a person out of a location
+function checkOut(location, personIndex) {
+    peopleAtLocations[location].splice(personIndex, 1); // Remove the person from the location by index
+    updatePeopleAtLocation(); // Update the displayed people list
+}
+
 
 // Function to toggle the display of the people list for a location
 function togglePeopleList(location) {
@@ -134,4 +149,3 @@ function togglePeopleList(location) {
 
 // Load locations on page load
 window.onload = loadLocations;
-
