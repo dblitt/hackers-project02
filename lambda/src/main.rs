@@ -289,6 +289,11 @@ async fn main() -> Result<(), Error> {
     // required to enable CloudWatch error logging by the runtime
     tracing::init_default_subscriber();
 
+    let cors = tower_http::cors::CorsLayer::new()
+        .allow_methods(tower_http::cors::Any)
+        .allow_origin(tower_http::cors::Any)
+        .allow_headers(tower_http::cors::Any);
+
     let app = Router::new()
         .route("/", get(root))
         .route("/foo", get(get_foo).post(post_foo))
@@ -296,7 +301,8 @@ async fn main() -> Result<(), Error> {
         .route("/parameters", get(get_parameters))
         .route("/checkin", post(post_checkin))
         .route("/getallcheckins", get(get_all_checkins_route))
-        .route("/health/", get(health_check));
+        .route("/health/", get(health_check))
+        .layer(cors);
 
     run(app).await
 }
